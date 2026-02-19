@@ -1,0 +1,924 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #202020;
+  --text-color: #e5e5e5;
+  --text-color-light: #fff;
+  --heading-color: #fed700;
+  --accent-color: #fe9800;
+  --btn-bg: #333;
+  --btn-text: var(--text-color-light);
+  --border-color: #e5e5e5;
+  --card-border-color: #444444;
+  --form-bg: #ffffff;
+  --form-text: #000000;
+  --header-sticky-bg: var(--bg-color);
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-text: rgba(255, 255, 255, 0.4);
+  --mobile-menu-bg: rgba(20, 20, 20, 0.8); /* Reduced alpha for better blur */
+  --nav-close-btn-color: var(--text-color);
+  --section-bg-color: #2a2a2a;
+  --section-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] {
+  --bg-color: #f4f4f4;
+  --text-color: #333333;
+  --text-color-light: #111;
+  --heading-color: #d8b400; /* Darker yellow for light mode */
+  --accent-color: #c77c00; /* Darkened for better contrast */
+  --btn-bg: #e0e0e0;
+  --btn-text: #111;
+  --border-color: #ccc;
+  --card-border-color: #ddd;
+  --form-bg: #ffffff;
+  --form-text: #000000;
+  --header-sticky-bg: #2d3748; /* Dark background for light theme sticky header */
+  --footer-border: rgba(0, 0, 0, 0.1);
+  --footer-text: #555;
+  --mobile-menu-bg: rgba(45, 55, 72, 0.85); /* Use a dark background for the light theme menu */
+  --nav-close-btn-color: #e5e5e5; /* Make the close button light to contrast with the dark menu */
+  --section-bg-color: #ffffff;
+  --section-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color-light);
+  transition: 0.3s;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  background-color: var(--bg-color);
+}
+
+.container {
+  max-width: 1170px;
+  width: 100%;
+  margin: auto;
+  padding: 0 15px;
+}
+
+/* Screen reader only utility class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--heading-color);
+  color: var(--bg-color);
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Use scroll-margin-top to offset anchor links for the fixed header */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Set a consistent, smaller padding for all sections */
+main > section {
+  padding-top: 60px;
+  padding: 60px 0;
+  margin-bottom: 30px;
+  background-color: var(--section-bg-color);
+  border-radius: 12px;
+  box-shadow: var(--section-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/*---------------------------Header---------------------------*/
+
+.header-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background-color: var(--header-sticky-bg);
+  padding: 5px 0;
+  transition: background-color 0.3s ease; /* Keep theme transition smooth */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding-bottom: 2rem; */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.logo .fa-bolt {
+  color: var(--heading-color);
+  font-size: 19.5px;
+  position: absolute;
+  top: 60%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+[data-theme="light"] .logo {
+  background-color: var(--header-sticky-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.signature {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header ul li:first-child {
+  margin-right: auto;
+}
+
+.header .navbar {
+  display: flex;
+  align-items: center;
+}
+
+.header .navbar li {
+  margin: 0 15px;
+}
+
+.header ul li a {
+  text-transform: capitalize;
+  display: block;
+  color: #e5e5e5; /* Set a light color for nav links to contrast with the dark header */
+}
+
+.header .navbar li a.active {
+  color: var(--heading-color);
+}
+
+.header .navbar li a:hover {
+  color: var(--heading-color);
+}
+
+.header ul li a:focus,
+.btn:focus,
+.profile-text .social i:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--heading-color);
+  outline-offset: 2px;
+}
+
+/* Override for better focus visibility on light theme inputs */
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus {
+  outline-color: #555; /* Dark gray provides better contrast against white background */
+}
+
+/* --- Hamburger Menu Button --- */
+.nav-toggle {
+  display: none; /* Hidden on desktop */
+  position: relative; /* Changed from absolute to keep it in the flex flow */
+  z-index: 9999; /* Ensure it's on top of the nav menu overlay */
+  background: transparent;
+  border: 0;
+  width: 2rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.nav-toggle::before,
+.nav-toggle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #e5e5e5; /* Use a consistent light color for the hamburger lines */
+  transition: transform 0.3s ease;
+}
+
+.nav-toggle::before {
+  top: 25%;
+}
+
+.nav-toggle::after {
+  bottom: 25%;
+}
+
+.nav-toggle[aria-expanded="true"]::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+/* Change color of the 'X' (close) button when menu is open */
+.nav-toggle[aria-expanded="true"]::before,
+.nav-toggle[aria-expanded="true"]::after {
+  background-color: var(--nav-close-btn-color);
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #e5e5e5; /* Set a light color to be visible on the dark header */
+}
+
+.nav-toggle[aria-expanded="true"]::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.theme-toggle:hover {
+  color: var(--heading-color);
+}
+
+.theme-toggle .fa-sun { display: none; } /* Hidden by default (dark theme) */
+.theme-toggle .fa-moon { display: block; } /* Shown by default (dark theme) */
+
+[data-theme="light"] .theme-toggle .fa-sun { display: block; } /* Show sun in light mode */
+[data-theme="light"] .theme-toggle .fa-moon { display: none; } /* Hide moon in light mode */
+
+
+
+
+/*---------------------------HomePage--------------------------*/
+
+.FirstElement {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 100px; /* Adjusted padding to account for fixed header */
+}
+
+.FirstElement.adjusted-padding {
+  padding-top: 40px;
+}
+
+.FirstElement .profile-photo {
+  max-width: 300px;
+  width: 100%; /* Allow the element to be flexible */
+  aspect-ratio: 1 / 1; /* Maintain a square shape */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 15px solid var(--card-border-color);
+  box-shadow: 5px 7px 25px rgba(0, 0, 0, 0.5)
+}
+
+profile-photo .img {
+  height: 100%;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.FirstElement .profile-photo img:hover {
+  transform: scale(1.2);
+}
+
+.profile-text {
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-text h5 {
+  color: var(--text-color);
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+
+.profile-text h1 {
+  color: var(--heading-color);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-text .intro-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.profile-text p {
+  color: var(--text-color);
+}
+
+.profile-text .social i {
+  color: var(--text-color);
+  font-size: 18px;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+
+.profile-text .social i:hover {
+  color: var(--heading-color);
+  transform: rotate(360deg);
+}
+
+
+
+/*---------------------------About---------------------------*/
+
+.about-area {
+  background-color: var(--bg-color);
+}
+.highlight-text {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.about-content {
+  flex-basis: 60%;
+}
+
+.about-content h2 {
+  color: var(--heading-color);
+  font-size: 40px;
+  line-height: 1.3;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  color: var(--text-color);
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.about-skills {
+  flex-basis: 35%;
+}
+
+.about-skills ul li {
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+.about-skills ul li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+
+/*---------------------------Button---------------------------*/
+
+.btn-group {
+  margin: 45px 0;
+}
+
+.btn-group .btn {
+  border-color: var(--border-color);
+  color: var(--btn-text);
+  background-color: var(--btn-bg);
+  padding: 12px 25px;
+  margin: 5px 0;
+  margin-right: 7px;
+  border-radius: 30px;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 10px 10px -8px rgb(0 0 0 / 78%);
+}
+
+.btn.active {
+  border-color: var(--heading-color);
+}
+
+/*---------------------------Experience---------------------------*/
+
+.timeline-section .title, .skills-title h2, .frameworks-title h2, .project-title h2, .contact-title h2 {
+  color: var(--heading-color);
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+
+/*---------------------------Education & Internship---------------------------*/
+
+.timeline-box {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.timeline {
+  /* background-color:#e5e5e5; */
+  padding: 30px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+  color: var(--text-color);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 37px;
+  padding-bottom: 50px;
+}
+
+.internship .timeline-item {
+  position: relative;
+  padding-left: 37px;
+  padding-bottom: 30px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  content: "";
+  width: 1px;
+  position: absolute;
+  height: 100%;
+  left: 7px;
+  top: 0;
+  background-color: var(--heading-color);
+}
+
+.circle-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+}
+
+.timeline-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.timeline-text {
+  line-height: 25px;
+  font-size: 16px;
+  text-align: justify;
+  /* list-style: none; */
+}
+/* --------------------------Skills ----------------------------- */
+.skills-content {
+  color: var(--text-color);
+  text-align: center;
+}
+.skills-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.skills-content .skills-title h2 {
+  font-size: 40px;
+  text-transform: capitalize;
+  color: var(--heading-color);
+  padding-bottom: 10px;
+}
+.Skills-content .skills-title p {
+  padding-bottom: 20px;
+}
+.skills {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.skill {
+  /* padding: 30px 15px; */
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+  padding: 8px;
+  text-align: center;
+  flex-basis: 32%;
+  transition: 0.3s;
+  min-width: 220px;
+  margin: 5px;
+}
+.skill:hover {
+  border-color: var(--heading-color);
+}
+.skill i {
+  font-size: 50px;
+  color: var(--heading-color);
+}
+
+.skill h4 {
+  font-size: 26px;
+  text-transform: capitalize;
+  margin: 20px 0;
+}
+.progress-bar {
+  width: 100%;
+  /* display: inline-block; */
+  background: #767676; /* Darkened for better contrast */
+  border-radius: 20px;
+  overflow: hidden;
+  height: 10px;
+  margin-bottom: 15px;
+}
+
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  width: 0%; /* Start with 0 width */
+  background-color: var(--accent-color);
+  border-radius: 20px;
+  transition: width 2s ease-in-out;
+}
+
+/*-------------------------- frameworks------------------------ */
+.frameworks-content {
+  color: var(--text-color);
+  text-align: center;
+}
+.frameworks-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.frameworks-content .frameworks-title h2 {
+  font-size: 40px;
+  text-transform: capitalize;
+  color: var(--heading-color);
+  padding-bottom: 10px;
+}
+.frameworks-content .frameworks-title p {
+  padding-bottom: 20px;
+}
+.frameworks {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.framework {
+  /* padding: 30px 15px; */
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+  padding: 8px;
+  text-align: center;
+  flex-basis: 32%;
+  transition: 0.3s;
+  min-width: 220px;
+  margin: 5px;
+}
+.framework:hover {
+  border-color: var(--heading-color);
+}
+.framework i {
+  font-size: 50px;
+  color: var(--heading-color);
+}
+
+.framework h4 {
+  font-size: 26px;
+  color:var(--accent-color);
+  text-transform: capitalize;
+  margin: 20px 0;
+}
+.framework p {
+  text-align: justify;
+}
+
+/*---------------------------Projects---------------------------*/
+
+
+.project-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.project-title h2 {
+  text-transform: uppercase;
+  font-size: 40px;
+  line-height: 40px;
+  color: var(--heading-color);
+  margin-bottom: 20px;
+}
+
+.project-title p {
+  color: var(--text-color);
+}
+
+.projects {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.project {
+  /* padding: 30px 15px; */
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  width: 100%;
+  position: relative;
+  padding: 25px;
+  text-align: center;
+  flex-basis: 32%;
+  transition: .3s;
+}
+
+.project i {
+  background-color: var(--heading-color);
+  width: 60px;
+  height: 60px;
+  color: var(--bg-color);
+  font-size: 26px;
+  line-height: 60px;
+  border-radius: 50%;
+}
+
+.project h4 {
+  font-size: 26px;
+  color :var(--accent-color);
+  text-transform: capitalize;
+  margin: 20px 0;
+}
+
+.project p {
+  text-align: justify;
+}
+
+.project:hover {
+  border-color: var(--heading-color);
+}
+
+
+
+
+/*---------------------------Contact Me---------------------------*/
+.contact-content {
+  color: var(--text-color);
+  text-align: center;
+}
+
+.contact-content .contact-title h2 {
+  font-size: 40px;
+  text-transform: capitalize;
+  color: var(--heading-color);
+  padding-bottom: 10px;
+}
+
+.contact-content .contact-title p {
+  padding-bottom: 20px;
+}
+
+.contact {
+  max-width: 700px;
+  margin: auto;
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.contact .submit {
+  width: auto;
+  background-color: var(--heading-color);
+  padding: 10px 40px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.contact .submit:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+#msg {
+  color: var(--text-color-light);
+  font-size: 20px;
+  margin-top: -8px;
+  display: block;
+}
+input ,textarea{
+  background-color: var(--form-bg);
+  color: var(--form-text);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+}
+
+
+
+
+/*---------------------------Footer---------------------------*/
+.footer {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 15px 0 26px;
+  border-top: 1px solid var(--footer-border);
+  color: var(--footer-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Specific styling for the footer button in light mode */
+[data-theme="light"] .footer .btn {
+  background-color: #ffffff; /* Use a clean white background */
+  color: #111111; /* Ensure text is dark and readable */
+  border-color: #ffffff;
+}
+
+.footer .message {
+  font-size: 12px;
+  color: var(--footer-text);
+  margin-bottom: 10px;
+}
+
+.copyright {
+  font-size: 12px;
+}
+
+
+
+
+/*------------------- Responsive Design on small screen -------------------*/
+
+/* Medium layout */
+@media only screen and (min-width:1000px) and (max-width:1200px) {
+  .container {
+    max-width: 970px;
+    width: 100%;
+  }
+}
+
+@media(max-width:1050px) {
+  .FirstElement {
+    flex-direction: column;
+    padding-top: 120px; /* Increased padding to prevent header overlap */
+  }
+
+  .profile-text {
+    padding: 40px 0px;
+  }
+  .FirstElement .profile-photo {
+    margin-bottom: 30px; /* Added margin below the photo for spacing */
+  }
+}
+
+
+
+/* tablet layout */
+@media only screen and (min-width:768px) and (max-width:999px) {
+  .container {
+    max-width: 750px;
+    width: 100%;
+  }
+}
+
+
+/* Mobile Layout */
+@media only screen and (max-width:767px) {
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .main-nav {
+    position: fixed;
+    inset: 0 0 0 40%; /* top, right, bottom, left. Covers right 60% of screen */
+    z-index: 999; /* Ensure menu is on top of other content */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center;
+    gap: 2rem;
+    padding: min(20vh, 10rem) 2rem;
+    background: var(--mobile-menu-bg);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem); /* For Safari */
+    transform: translateX(100%);
+    border-left: 2px solid var(--card-border-color);
+    transition: transform 350ms ease-out;
+  }
+
+  .main-nav[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .main-nav .navbar {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center; /* Align text to the center */
+  }
+
+  .main-nav .navbar a {
+    color: var(--text-color); /* Use theme's text color for mobile menu links */
+  }
+
+  /* Override mobile nav link color for light theme to be visible on the new dark background */
+  [data-theme="light"] .main-nav .navbar a {
+    color: #e5e5e5;
+  }
+
+  .main-nav .theme-toggle {
+    color: var(--text-color); /* Ensure toggle is visible in mobile menu */
+  }
+
+  /* Override mobile toggle button color for light theme to be visible on the new dark background */
+  [data-theme="light"] .main-nav .theme-toggle {
+    color: #e5e5e5;
+  }
+
+  .main-nav .navbar li {
+    margin: 0; /* Remove horizontal margin from desktop view */
+  }
+
+  .about-area {
+    margin-top: 30px; /* Add space above the about section on mobile */
+  }
+
+  .about {
+    flex-direction: column;
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+
+  .about-skills {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .skill,
+  .framework {
+    flex-basis: 100%;
+  }
+
+  .project {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+
+}
